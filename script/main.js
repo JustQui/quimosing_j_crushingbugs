@@ -35,13 +35,19 @@ function handleDragOver(e) {
 }
 
 function handleDrop(e) {
-	e.preventDefault();
-	console.log('dropped something on me');
-
 	//this lone is going to move the dragged piece from the left side of the board
 	//into whatever drop zone we choose, appendChild means "add element to the container"
-	this.appendChild(draggedPiece);
-}
+	e.preventDefault();
+	console.log('dropped something on me');
+  
+	// check if there are already children in the drop zone
+	if (this.children.length === 0) {
+	  // move the dragged piece from the left side of the board
+	  // into the drop zone
+	  this.appendChild(draggedPiece);
+	}
+  }
+
 
 function blockDefault(e) {
 	// bloc the default behavior of certain elements (a tags, forms, etc)
