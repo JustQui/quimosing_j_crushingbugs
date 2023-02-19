@@ -17,8 +17,15 @@ let theButtons = document.querySelectorAll('#buttonHolder img'),
 
 // functions go in the middle
 // these are the "actions" that should happen
-function changeBGImage() {	
+function changeBGImage() {
 	puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
+	
+	// remove puzzle pieces from drop zones and append them back to the drag zone
+	dropZones.forEach(zone => {
+		while (zone.children.length > 0) {
+		puzzleBoard.appendChild(zone.children[0]);
+		}
+	  });
 }
 
 function handleStartDrag() { 
@@ -42,8 +49,6 @@ function handleDrop(e) {
   
 	// check if there are already children in the drop zone
 	if (this.children.length === 0) {
-	  // move the dragged piece from the left side of the board
-	  // into the drop zone
 	  this.appendChild(draggedPiece);
 	}
   }

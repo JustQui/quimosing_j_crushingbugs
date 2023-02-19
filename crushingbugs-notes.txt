@@ -1,0 +1,54 @@
+==== Stacking Puzzle Pieces Bug ====
+
+The pieces need to stop being stacked on top.
+Steps:
+1. the function must know to append a child 'draggedPiece'
+2. it must only append if there is no child already appended.
+
+'if' function: only works if certain constraints are met.
+
+(this.children.length === 0) : 'if' constraints that tells that
+function is only viable if the zone has no children.
+
+Therefore, if there is any child already appended in the zone,
+then no other child/piece can be stacked on top.
+
+Code:
+function handleDrop(e) {
+	e.preventDefault();
+	console.log('dropped something on me');
+  
+	if (this.children.length === 0) {
+	  this.appendChild(draggedPiece);
+	}
+  }
+
+==== Reset BG Image Bug ====
+
+Puzzle board needs to be cleared whenever the background image is changed.
+Steps:
+1. Be able to change BGI image
+2. all pieces/children are reset when step 1 happens.
+
+dropZones.forEach(zone => {}) : specifies function applies for each 'zone'
+in the code.
+
+'while' function: only active when certain constraints are met.
+
+while (zone.children.length > 0) : function is active when the
+drop zone has more than 0 children/pieces appended.
+
+puzzleBoard.appendChild(zone.children[0]) : allows for the zone to
+append 0 children/pieces each time the bg image is changed, ergo
+reseting the puzzle board.
+
+code:
+function changeBGImage() {
+	puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
+	
+	dropZones.forEach(zone => {
+		while (zone.children.length > 0) {
+		puzzleBoard.appendChild(zone.children[0]);
+		}
+	  });
+}
